@@ -114,6 +114,7 @@ php artisan make:migration create_<table_name>_table
 
 
 Update Filtering Logic: Modify the FilterDataMigration listener (app/Listeners/FilterDataMigration.php) to include filtering rules for each new table. Example:
+```
 if ($event->table === 'orders') {
     foreach ($event->data as $row) {
         if (stripos($row['name'], 'test') === false && stripos($row['email'], 'test') === false) {
@@ -127,10 +128,10 @@ if ($event->table === 'orders') {
         }
     }
 }
-
+```
 
 Add Tables to Command: Update the $tables array in app/Console/Commands/MigrateDatabase.php to include new table names:
-protected $tables = ['users',  /* add other tables */];
+```protected $tables = ['users',  /* add other tables */];```
 
 
 Test with Dummy Data: Create migrations and seeders for additional tables in the old_db database, similar to the users table setup.
