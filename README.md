@@ -12,11 +12,11 @@ Features
 
 ## Prerequisites
 
-PHP 8.1 or higher
-Laravel 11.x or 12.x
-MySQL (or another supported database) for both old and new databases
-Redis (recommended) or database queue driver for queue processing
-Composer for dependency management
+- PHP 8.1 or higher
+- Laravel 11.x or 12.x
+- MySQL (or another supported database) for both old and new databases
+- Redis (recommended) or database queue driver for queue processing
+- Composer for dependency management
 
 ## Installation
 Follow these steps to set up the project locally:
