@@ -2,8 +2,8 @@
 This Laravel project provides a robust solution for migrating data from an old database to a new, simplified database schema. It filters out test or dummy data during migration using Laravel's events, listeners, and queues for efficient and scalable data processing. A dummy users table is included for testing the migration process.
 Features
 
-    . Scalable Data Migration: Handles large datasets across 120 tables by processing data in chunks (1000 rows per chunk) to prevent memory issues.
-    . Test/Dummy Data Filtering: Excludes test or dummy data based on configurable criteria (e.g., names/emails containing "test" or is_test flag).
+- Scalable Data Migration: Handles large datasets across 120 tables by processing data in chunks (1000 rows per chunk) to prevent memory issues.
+- Test/Dummy Data Filtering: Excludes test or dummy data based on configurable criteria (e.g., names/emails containing "test" or is_test flag).
     . Asynchronous Processing: Utilizes Laravel queues (e.g., Redis or database driver) to process data migrations asynchronously, ensuring performance and reliability.
     . Event-Driven Architecture: Leverages Laravel events and listeners to modularize data filtering and processing logic.
     . Error Handling and Logging: Includes comprehensive logging for migration progress and errors, stored in storage/logs/laravel.log.
