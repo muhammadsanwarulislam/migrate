@@ -4,13 +4,13 @@ Features
 
 - Scalable Data Migration: Handles large datasets across 120 tables by processing data in chunks (1000 rows per chunk) to prevent memory issues.
 - Test/Dummy Data Filtering: Excludes test or dummy data based on configurable criteria (e.g., names/emails containing "test" or is_test flag).
-    . Asynchronous Processing: Utilizes Laravel queues (e.g., Redis or database driver) to process data migrations asynchronously, ensuring performance and reliability.
-    . Event-Driven Architecture: Leverages Laravel events and listeners to modularize data filtering and processing logic.
-    . Error Handling and Logging: Includes comprehensive logging for migration progress and errors, stored in storage/logs/laravel.log.
-    . Dummy Data for Testing: Provides a sample users table with 20 records (11 valid, 9 test/dummy) to test the migration and filtering logic.
-    . Customizable: Easily extendable to support additional tables and custom filtering rules for each table's schema.
+- Asynchronous Processing: Utilizes Laravel queues (e.g., Redis or database driver) to process data migrations asynchronously, ensuring performance and reliability.
+- Event-Driven Architecture: Leverages Laravel events and listeners to modularize data filtering and processing logic.
+- Error Handling and Logging: Includes comprehensive logging for migration progress and errors, stored in storage/logs/laravel.log.
+- Dummy Data for Testing: Provides a sample users table with 20 records (11 valid, 9 test/dummy) to test the migration and filtering logic.
+- Customizable: Easily extendable to support additional tables and custom filtering rules for each table's schema.
 
-Prerequisites
+## Prerequisites
 
 PHP 8.1 or higher
 Laravel 11.x or 12.x
@@ -18,7 +18,7 @@ MySQL (or another supported database) for both old and new databases
 Redis (recommended) or database queue driver for queue processing
 Composer for dependency management
 
-Installation
+## Installation
 Follow these steps to set up the project locally:
 
 Clone the Repository
@@ -34,24 +34,30 @@ composer install
 Configure Environment
 Copy the .env.example file to .env and update it with your database credentials for both the old and new databases:
 # Old database (source)
+```
 OLD_DB_HOST=127.0.0.1
 OLD_DB_PORT=3306
 OLD_DB_DATABASE=old_database
 OLD_DB_USERNAME=root
 OLD_DB_PASSWORD=
+```
 
 # New database (destination)
+```
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=new_database
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
 # Queue configuration (recommended: redis)
+```
 QUEUE_CONNECTION=redis / database
 REDIS_HOST=127.0.0.1
 REDIS_PASSWORD=null
 REDIS_PORT=6379
+```
 
 
 Set Up Queue Driver
