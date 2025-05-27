@@ -144,14 +144,14 @@ Add Tables to Command: Update the $tables array in app/Console/Commands/MigrateD
 ```protected $tables = ['users',  /* add other tables */];```
 
 
-Test with Dummy Data: Create migrations and seeders for additional tables in the old_db database, similar to the users table setup.
+**Test with Dummy Data: Create migrations and seeders for additional tables in the old_db database, similar to the users table setup.**
 
 
-Troubleshooting
+## Troubleshooting
 
-Queue Jobs Failing: Check storage/logs/laravel.log for errors. Ensure the queue worker is running and the queue driver is properly configured.
-Database Connection Issues: Verify database credentials in .env and ensure both databases are accessible.
-Memory Issues: Adjust the chunk size in MigrateDatabase.php (default: 1000 rows) if processing large tables causes memory exhaustion.
+- **Queue Jobs Failing:** Check storage/logs/laravel.log for errors. Ensure the queue worker is running and the queue driver is properly configured.
+- **Database Connection Issues:** Verify database credentials in .env and ensure both databases are accessible.
+- **Memory Issues:** Adjust the chunk size in MigrateDatabase.php (default: 1000 rows) if processing large tables causes memory exhaustion.
 
-Contributing
+## Contributing
 Contributions are welcome! Please submit a pull request or open an issue for suggestions or bug reports.
