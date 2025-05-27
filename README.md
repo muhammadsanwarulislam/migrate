@@ -140,7 +140,7 @@ if ($event->table === 'orders') {
 }
 ```
 
-Add Tables to Command: Update the **$tables array in app/Console/Commands/MigrateDatabase.php** to include new table names:
+## Add Tables to Command: Update the **$tables array in app/Console/Commands/MigrateDatabase.php** to include new table names:
 ```protected $tables = ['users',  /* add other tables */];```
 
 
