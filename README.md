@@ -1,14 +1,14 @@
-Database Migration
+## Database Migrator
 This Laravel project provides a robust solution for migrating data from an old database to a new, simplified database schema. It filters out test or dummy data during migration using Laravel's events, listeners, and queues for efficient and scalable data processing. A dummy users table is included for testing the migration process.
 Features
 
-Scalable Data Migration: Handles large datasets across 120 tables by processing data in chunks (1000 rows per chunk) to prevent memory issues.
-Test/Dummy Data Filtering: Excludes test or dummy data based on configurable criteria (e.g., names/emails containing "test" or is_test flag).
-Asynchronous Processing: Utilizes Laravel queues (e.g., Redis or database driver) to process data migrations asynchronously, ensuring performance and reliability.
-Event-Driven Architecture: Leverages Laravel events and listeners to modularize data filtering and processing logic.
-Error Handling and Logging: Includes comprehensive logging for migration progress and errors, stored in storage/logs/laravel.log.
-Dummy Data for Testing: Provides a sample users table with 20 records (11 valid, 9 test/dummy) to test the migration and filtering logic.
-Customizable: Easily extendable to support additional tables and custom filtering rules for each table's schema.
+    . Scalable Data Migration: Handles large datasets across 120 tables by processing data in chunks (1000 rows per chunk) to prevent memory issues.
+    . Test/Dummy Data Filtering: Excludes test or dummy data based on configurable criteria (e.g., names/emails containing "test" or is_test flag).
+    . Asynchronous Processing: Utilizes Laravel queues (e.g., Redis or database driver) to process data migrations asynchronously, ensuring performance and reliability.
+    . Event-Driven Architecture: Leverages Laravel events and listeners to modularize data filtering and processing logic.
+    . Error Handling and Logging: Includes comprehensive logging for migration progress and errors, stored in storage/logs/laravel.log.
+    . Dummy Data for Testing: Provides a sample users table with 20 records (11 valid, 9 test/dummy) to test the migration and filtering logic.
+    . Customizable: Easily extendable to support additional tables and custom filtering rules for each table's schema.
 
 Prerequisites
 
