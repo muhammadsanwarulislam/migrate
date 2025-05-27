@@ -60,40 +60,40 @@ REDIS_PORT=6379
 ```
 
 
-Set Up Queue Driver
+## Set Up Queue Driver
 If using the database queue driver, create the jobs table:
+```
 php artisan queue:table
 php artisan migrate
+```
 
 For Redis, ensure the Redis server is running and configured in .env.
 
 Run Migrations for New Database
 Create the schema for the new database (e.g., users table):
+```
 php artisan migrate
+```
 
-
-
-Usage
+## Usage
 
 Start the Queue Worker
+```
 Run the queue worker to process migration jobs:
 php artisan queue:work --queue=migration
-
+```
 Run this in a separate terminal or as a background process.
 
-Run the Migration
 Execute the migration command to process data from the old database to the new database:
+```
 php artisan migrate:database
+```
+- Reads data from each table in the old database (configured in MigrateDatabase.php).
+- Dispatches a DataMigrationRequested event for filtering.
+- Filters out test/dummy data using the FilterDataMigration listener.
+- Queues filtered data for insertion into the new database via MigrateDataJob.
 
-This command:
-
-Reads data from each table in the old database (configured in MigrateDatabase.php).
-Dispatches a DataMigrationRequested event for filtering.
-Filters out test/dummy data using the FilterDataMigration listener.
-Queues filtered data for insertion into the new database via MigrateDataJob.
-
-
-Monitor Logs
+## Monitor Logs
 Check storage/logs/laravel.log for migration progress and error details.
 
 
@@ -103,14 +103,18 @@ To test the migration with the dummy users table:
 Ensure the dummy data is seeded in the old_db database (see Installation step 6).
 
 Run the migration command:
+```
 php artisan migrate:database
+```
 
 
 Verify the new_database.users table contains only non-test records (e.g., 11 records out of 20, excluding those with is_test = 1 or "test"/"dummy" in name/email).
 
 
 Use the following SQL query to check:
+```
 SELECT * FROM new_database.users;
+```
 
 Extending to Additional Tables
 To migrate additional tables (up to 120):
