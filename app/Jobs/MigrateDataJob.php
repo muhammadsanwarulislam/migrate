@@ -31,7 +31,7 @@ class MigrateDataJob implements ShouldQueue
         }
         try {
             // Insert data in chunks to avoid memory issues
-            collect($this->data)->chunk(10)->each(function ($chunk) {
+            collect($this->data)->chunk(100)->each(function ($chunk) {
                 DB::table($this->table)->insert($chunk->toArray());
             });
 

@@ -29,14 +29,12 @@ class FilterDataMigration
         if ($event->table === 'users') {
             foreach ($event->data as $row) {
                 // Skip test/dummy data (e.g., name contains 'test' or email contains 'test')
-                if (
-                    stripos($row['name'], 'test') === false &&
-                    stripos($row['email'], 'test') === false
-                ) {
+                if (!str_contains($row['name'], 'test') && !str_contains($row['email'], 'test')) {
                     $filteredData[] = [
                         'name' => $row['name'],
                         'email' => $row['email'],
-                        'password' => $row['password'], // Ensure passwords are hashed if needed
+                        'password' => $row['password'],
+                        'is_test' => $row['is_test'], 
                         'created_at' => $row['created_at'] ?? now(),
                         'updated_at' => $row['updated_at'] ?? now(),
                     ];
