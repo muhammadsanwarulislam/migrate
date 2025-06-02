@@ -77,9 +77,8 @@ php artisan migrate
 
 ## Usage
 
-Start the Queue Worker
-```
 Run the queue worker to process migration jobs:
+```
 php artisan queue:work --queue=migration
 ```
 Run this in a separate terminal or as a background process.
