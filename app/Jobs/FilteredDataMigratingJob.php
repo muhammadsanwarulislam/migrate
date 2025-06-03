@@ -25,14 +25,10 @@ class FilteredDataMigratingJob implements ShouldQueue
 
     public function handle()
     {
-        if (empty($this->data)) {
-            Log::warning("No data to migrate for table: {$this->table}");
-            return;
-        }
         try {
             // Insert data in chunks to avoid memory issues
             collect($this->data)->chunk(100)->each(function ($chunk) {
-                DB::table($this->table)->insert($chunk->toArray());
+                DB::table($this->table)->updateOrInsert(['id' => $chunk->first()->id],$chunk->toArray());
             });
 
             Log::info("Successfully migrated {$this->table} data: " . count($this->data) . " records");
