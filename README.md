@@ -83,68 +83,25 @@ php artisan queue:work --queue=migration
 ```
 Run this in a separate terminal or as a background process.
 
-Execute the migration command to process data from the old database to the new database:
-```
-php artisan migrate:database
-```
-- Reads data from each table in the old database (configured in MigrateDatabase.php).
-- Dispatches a DataMigrationRequested event for filtering.
-- Filters out test/dummy data using the FilterDataMigration listener.
-- Queues filtered data for insertion into the new database via MigrateDataJob.
+**Execute the ```migrate``` command to process data from the old database to the new database**
+- Run the Command for a Specific Table : ```php artisan migrate:table users``` This migrates only the users table with the defined filters.
+- Run for All Tables: ```php artisan migrate:table``` This migrates all configured tables (users, domains, news).
+- Reads data from each table in the old database (configured in MigrateFilteredTableData.php).
+- Dispatches a TableDataFiltered event for filtering.
+- Filters out test/dummy data using the HandleTableDataMigration listener.
+- Queues filtered data for insertion into the new database via FilteredDataMigratingJob.
 
 ## Monitor Logs
 Check storage/logs/laravel.log for migration progress and error details.
 
 
-Testing the Migration
-To test the migration with the dummy users table:
-
-Ensure the dummy data is seeded in the old_db database (see Installation step 6).
-
-Run the migration command:
-```
-php artisan migrate:database
-```
-
-
 Verify the new_database.users table contains only non-test records (e.g., 11 records out of 20, excluding those with is_test = 1 or "test"/"dummy" in name/email).
 
+**Create Migrations: Generate migrations for each table in the new database:** ```php artisan make:migration create_<table_name>_table```
 
-Use the following SQL query to check:
-```
-SELECT * FROM new_database.users;
-```
-
-Extending to Additional Tables
-To migrate additional tables (up to 120):
-
-Create Migrations: Generate migrations for each table in the new database:
-php artisan make:migration create_<table_name>_table
-
-
-Update Filtering Logic: Modify the FilterDataMigration listener (app/Listeners/FilterDataMigration.php) to include filtering rules for each new table. Example:
-```
-if ($event->table === 'orders') {
-    foreach ($event->data as $row) {
-        if (stripos($row['name'], 'test') === false && stripos($row['email'], 'test') === false) {
-            $filteredData[] = [
-                'user_id' => $row['user_id'],
-                'description' => $row['description'],
-                'amount' => $row['amount'],
-                'created_at' => $row['created_at'] ?? now(),
-                'updated_at' => $row['updated_at'] ?? now(),
-            ];
-        }
-    }
-}
-```
-
-**Add Tables to Command:** Update the ```$tables array in app/Console/Commands/MigrateDatabase.php`` to include new table names:
-```protected $tables = ['users',  /* add other tables */];```
-
+**Add Tables to Command:** Update the ```$tables array in app/Console/Commands/TransferFilteredTableData.php`` to include new table names:
 
 **Test with Dummy Data: Create migrations and seeders for additional tables in the old_db database, similar to the users table setup.**
-
 
 ## Troubleshooting
 

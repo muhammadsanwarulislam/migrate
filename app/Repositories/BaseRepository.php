@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
-use App\Events\DataMigrationRequested;
+use App\Events\TableDataFiltered;
 
 abstract class BaseRepository
 {
@@ -46,7 +46,7 @@ abstract class BaseRepository
                 $filteredData = $this->filterData($data);
 
                 // Dispatch event with filtered data
-                event(new DataMigrationRequested($table, $filteredData));
+                event(new TableDataFiltered($table, $filteredData));
 
                 // Call the callback for logging or additional processing
                 $callback($table, count($filteredData));
