@@ -21,18 +21,12 @@ Features
 ## Installation
 Follow these steps to set up the project locally:
 
-Clone the Repository
-git clone <repository-url>
-cd migrate
+1. Clone or download the repository.
+2. Go to the project directory and run `composer install`.
+3. Create a `.env` file by copying `.env.example` using `cp .env.example .env`.
+4. Update the database name and credentials in the `.env` file.
+5. Run `php artisan migrate:fresh` to set up the database.
 
-
-Install Dependencies
-Install PHP dependencies using Composer:
-composer install
-
-
-Configure Environment
-Copy the .env.example file to .env and update it with your database credentials for both the old and new databases:
 # Old database (source)
 ```
 OLD_DB_HOST=127.0.0.1
